@@ -18,14 +18,13 @@ import Card, { CardActions, CardContent } from 'material-ui/Card';
 import {
   Divider,
   List,
-  ListItem,
   Avatar,
   ListItemText,
   TextField,
   ListSubheader,
 } from 'material-ui';
-import ImageIcon from 'material-ui-icons/Image';
-import WorkIcon from 'material-ui-icons/Work';
+//import ImageIcon from 'material-ui-icons/Image';
+//import WorkIcon from 'material-ui-icons/Work';
 import BeachAccessIcon from 'material-ui-icons/BeachAccess';
 import Directions from 'material-ui-icons/Directions';
 import ChangeHistory from 'material-ui-icons/ChangeHistory';
@@ -35,12 +34,12 @@ import ExpansionPanel, {
   ExpansionPanelActions,
 } from 'material-ui/ExpansionPanel';
 import ExpandMoreIcon from 'material-ui-icons/ExpandMore';
-import Chip from 'material-ui/Chip';
+//import Chip from 'material-ui/Chip';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 
-import IconButton from 'material-ui/IconButton';
-import MenuIcon from 'material-ui-icons/Menu';
+//import IconButton from 'material-ui/IconButton';
+//import MenuIcon from 'material-ui-icons/Menu';
 import classNames from 'classnames';
 const { FloatingActionButton, RaisedButton } = require('material-ui');
 const MapsLocalPhone = BeachAccessIcon;
@@ -162,9 +161,11 @@ class Index extends React.Component<WithStyles<'root'>> {
         <div className={this.props.classes.root}>
           <div className={this.props.classes.iroot}>
             <Dialog open={this.open} onClose={() => (this.open = false)}>
-              <DialogTitle>Statistics</DialogTitle>
+              <DialogTitle>Map</DialogTitle>
               <DialogContent>
-                <DialogContentText>1-2-3-4-5</DialogContentText>
+                <DialogContentText>
+                  <img src="https://i.imgur.com/mLgftOQ.png" style={{width: "100%"}}/>
+                </DialogContentText>
               </DialogContent>
               <DialogActions>
                 <Button color="primary" onClick={() => (this.open = false)}>
@@ -191,7 +192,7 @@ class Index extends React.Component<WithStyles<'root'>> {
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button size="small">Show on map</Button>
+                <Button size="small" onClick={() => (this.open = true)}>Show on map</Button>
               </CardActions>
             </Card>
             <List>
@@ -222,7 +223,7 @@ class Index extends React.Component<WithStyles<'root'>> {
                 <Divider />
                 <ExpansionPanelActions>
                   <Button size="small">...</Button>
-                  <Button size="small" color="primary">
+                  <Button size="small" color="primary" onClick={() => (this.open = true)}>
                     Show on map
                   </Button>
                 </ExpansionPanelActions>
@@ -256,7 +257,7 @@ class Index extends React.Component<WithStyles<'root'>> {
                 <Divider />
                 <ExpansionPanelActions>
                   <Button size="small">...</Button>
-                  <Button size="small" color="primary">
+                  <Button size="small" color="primary" onClick={() => (this.open = true)}>
                     Show on map
                   </Button>
                 </ExpansionPanelActions>
@@ -308,7 +309,7 @@ class Index extends React.Component<WithStyles<'root'>> {
                   </Avatar>
                   <ListItemText
                     className={classes.left}
-                    primary="Hut"
+                    primary="Ski Cabin"
                     secondary={
                       <span>
                         <span className={classes.med}>~30 min</span> via fastest route
