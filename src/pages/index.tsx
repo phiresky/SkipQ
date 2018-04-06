@@ -21,22 +21,7 @@ type State = {
   open: boolean;
 };
 
-class Index extends React.Component<WithStyles<'root'>, State> {
-  state = {
-    open: false,
-  };
-
-  handleClose = () => {
-    this.setState({
-      open: false,
-    });
-  };
-
-  handleClick = () => {
-    this.setState({
-      open: true,
-    });
-  };
+class Index extends React.Component<WithStyles<'root'>> {
 
   render() {
     return (
