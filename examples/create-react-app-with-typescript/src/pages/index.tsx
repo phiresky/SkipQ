@@ -27,6 +27,8 @@ import {
 import ImageIcon from 'material-ui-icons/Image';
 import WorkIcon from 'material-ui-icons/Work';
 import BeachAccessIcon from 'material-ui-icons/BeachAccess';
+import Directions from 'material-ui-icons/Directions';
+import ChangeHistory from 'material-ui-icons/ChangeHistory';
 import ExpansionPanel, {
   ExpansionPanelDetails,
   ExpansionPanelSummary,
@@ -89,6 +91,9 @@ const styles: StyleRulesCallback<'root'> = theme => ({
     fontSize: theme.typography.pxToRem(15),
     color: theme.palette.text.secondary,
   },
+  left: {
+    textAlign: 'left',
+  },
   icon: {
     verticalAlign: 'bottom',
     height: 20,
@@ -141,6 +146,7 @@ type State = {
   open: boolean,
 };
 
+const gondolaIcon = <Avatar><img width={40} src="https://d30y9cdsu7xlg0.cloudfront.net/png/7337-200.png" /></Avatar>;
 @observer
 class Index extends React.Component<WithStyles<'root'>> {
   @observable open = false;
@@ -178,75 +184,138 @@ class Index extends React.Component<WithStyles<'root'>> {
                   Currently sitting in
                 </Typography>
                 <Typography variant="headline" component="h3">
-                  XY-Lift
+                  Chairlift
                 </Typography>
                 <Typography className={classes.pos} color="textSecondary">
                   Time to arrival at peak: <span className={classes.fast}>~12 min</span>
                 </Typography>
-                {/*
-          <Typography component="p">
-            well meaning and kindly.<br />
-            {'"a benevolent smile"'}
-    </Typography>*/}
               </CardContent>
               <CardActions>
-                <Button size="small">Learn More</Button>
+                <Button size="small">Show on map</Button>
               </CardActions>
             </Card>
             <List>
-              <ListSubheader>Directly reachable lifts</ListSubheader>
-              <ListItem button>
-                <Avatar>
-                  <ImageIcon />
-                </Avatar>
-                <ListItemText
-                  primary="Gondola"
-                  secondary={
-                    <span>
-                      <span className={classes.fast}>~10 min</span> wait time
-                    </span>
-                  }
-                />
-                <Avatar className={classes.bluePist}>9a</Avatar>
-                <Avatar className={classes.redPist}>16</Avatar>
-              </ListItem>
-              <ListItem button>
-                <Avatar>
-                  <WorkIcon />
-                </Avatar>
-                <ListItemText
-                  primary="Cable car"
-                  secondary={
-                    <span>
-                      <span className={classes.slow}>~30 min</span> wait time
-                    </span>
-                  }
-                />
-                <Avatar className={classes.redPist}>21</Avatar>
-                <Avatar className={classes.blackPist}>4</Avatar>
-                <Avatar className={classes.redPist}>13b</Avatar>
-                <Avatar className={classes.bluePist}>10</Avatar>
-              </ListItem>
-              <ListSubheader>{`Near Points of Interest`}</ListSubheader>
-            
-              
+              <ListSubheader style={{background: 'white'}}>Directly reachable lifts</ListSubheader>
+
+              <ExpansionPanel>
+                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                  {gondolaIcon}
+                  <ListItemText
+                    className={classes.left}
+                    primary="Gondola"
+                    secondary={
+                      <span>
+                        <span className={classes.fast}>~10 min</span> wait time
+                      </span>
+                    }
+                  />
+                  <Avatar className={classes.bluePist}>9a</Avatar>
+                  <Avatar className={classes.redPist}>16</Avatar>
+                  <Avatar />
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails>
+                  <Typography>
+                    <li>Capacity: 10 persons</li>
+                    <li>Last ascent: 16:15</li>
+                  </Typography>
+                </ExpansionPanelDetails>
+                <Divider />
+                <ExpansionPanelActions>
+                  <Button size="small">...</Button>
+                  <Button size="small" color="primary">
+                    Show on map
+                  </Button>
+                </ExpansionPanelActions>
+              </ExpansionPanel>
+
+              <ExpansionPanel>
+                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                  <Avatar>
+                  <img src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTguMS4xLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDQ5MiA0OTIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDQ5MiA0OTI7IiB4bWw6c3BhY2U9InByZXNlcnZlIiB3aWR0aD0iMzJweCIgaGVpZ2h0PSIzMnB4Ij4KPGc+Cgk8cGF0aCBkPSJNNDI2LjA5NCwzNzFjOS4zMzQtMy4zMzMsMTYuMzM0LTkuMzMzLDIxLTE4YzQuNjY4LTguNjY3LDUuMzM0LTE3LjY2NywyLTI3bC0xNCw0ICAgYzIsNS4zMzQsMS42NjgsMTAuNjY3LTEsMTZjLTIuNjY2LDUuMzMzLTYuNjY2LDktMTIsMTFsLTM1OSwxMjFsNSwxNEw0MjYuMDk0LDM3MXoiIGZpbGw9IiMwMDAwMDAiLz4KCTxwYXRoIGQ9Ik05Ni4wOTUsMTYxYzEwLTIuNjY3LDE3LjMzMy04LjUsMjItMTcuNXM1LjY2Ny0xOC4zMzMsMy0yOHMtOC41LTE3LTE3LjUtMjJzLTE4LjUtNi4xNjctMjguNS0zLjUgICBzLTE3LjUsOC41LTIyLjUsMTcuNXMtNiwxOC41LTMsMjguNXM5LDE3LjMzMywxOCwyMlM4Ni4wOTUsMTYzLjY2Nyw5Ni4wOTUsMTYxeiIgZmlsbD0iIzAwMDAwMCIvPgoJPHBhdGggZD0iTTgxLjA5NSwyMTJjLTUuMzMzLTkuMzM0LTYuMTY3LTE3LjY2OC0yLjUtMjVjMy42NjctNy4zMzYsOS0xMy4xNjksMTYtMTcuNSAgIGM3LTQuMzQzLDE0LjgzMy01LjY3NiwyMy41LTRjOC42NjcsMS42NjgsMTUuMzM0LDYuODM0LDIwLDE1LjVsNDEsNzZsNzctMjFjNi0yLDEyLjUtMC4xNjcsMTkuNSw1LjVzMTAuNSwxMi41LDEwLjUsMjAuNXYxMDkgICBjMCw4LjY2Ny0zLjMzMiwxNC42NjctMTAsMThzLTEzLjMzNCwzLjE2Ny0yMC0wLjVjLTYuNjY2LTMuNjY3LTEwLTkuNS0xMC0xNy41bC0xLTgwbC04MCwyNGMtMTcuMzMzLDUuMzMzLTMwLjMzMywwLTM5LTE2ICAgTDgxLjA5NSwyMTJ6IiBmaWxsPSIjMDAwMDAwIi8+Cgk8cG9seWdvbiBwb2ludHM9IjIwNS4wOTUsMjMwIDIwNS4wOTUsMCAxODUuMDk1LDAgMTg1LjA5NSwyMzQgICIgZmlsbD0iIzAwMDAwMCIvPgoJPHBhdGggZD0iTTQ0LjA5NSwyNjJjLTQtNi42NjctNC4zMzMtMTIuNjY3LTEtMThzOC4xNjctNy44MzMsMTQuNS03LjVjNi4zMzMsMC4zMzQsMTEuMTY3LDQuMTY4LDE0LjUsMTEuNSAgIGwzNSw2N2M4LjY2NywxNiwyMS42NjcsMjQsMzksMjRjMi42NjcsMCw3LjY2Ny0xLDE1LTNsNDQtMTJjNy4zMzMtMi42NjIsMTMuMzMzLTEuODI5LDE4LDIuNWM0LjY2Nyw0LjMzMyw2LjE2Nyw5LjUsNC41LDE1LjUgICBzLTYuMTY3LDEwLTEzLjUsMTJsLTQ2LDEzYy02LjY2NywyLTE0LDMtMjIsM2MtMTQuNjY3LDAtMjgtMy42NjctNDAtMTFzLTIxLjMzMy0xNy4zMzMtMjgtMzBMNDQuMDk1LDI2MnoiIGZpbGw9IiMwMDAwMDAiLz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K" />
+                  </Avatar>
+                  <ListItemText
+                    className={classes.left}
+                    primary="Chairlift"
+                    secondary={
+                      <span>
+                        <span className={classes.med}>~30 min</span> via fastest route
+                      </span>
+                    }
+                  />
+                  <Avatar className={classes.redPist}>3</Avatar>
+                  <Avatar className={classes.blackPist}>7</Avatar>
+
+                  <Avatar />
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails>
+                  <Typography>
+                    <li>Capacity: 4 persons</li>
+                    <li>Last ascent: 16:00</li>
+                  </Typography>
+                </ExpansionPanelDetails>
+                <Divider />
+                <ExpansionPanelActions>
+                  <Button size="small">...</Button>
+                  <Button size="small" color="primary">
+                    Show on map
+                  </Button>
+                </ExpansionPanelActions>
+              </ExpansionPanel>
+
+              <ListSubheader  style={{background: 'white'}}>Suggested routes</ListSubheader>
+              <ExpansionPanel>
+                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                  <Avatar>
+                    <Directions color={"primary"} />
+                  </Avatar>
+                  <ListItemText
+                    className={classes.left}
+                    primary="Trail route"
+                    secondary={
+                      <span>
+                        <span>~60 min</span>{' '}
+                        <span className={classes.slow}>difficult</span>
+                      </span>
+                    }
+                  />
+                  <Avatar className={classes.bluePist}>5</Avatar>
+                  <Avatar className={classes.redPist}>3</Avatar>
+                  <Avatar />
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails>
+                  <Typography>
+                    <div>
+                      <Avatar className={classes.bluePist}>5</Avatar>{' '}
+                      <Typography>Ski down piste 5 — 5 minutes</Typography>
+                    </div>
+                    <p>
+                      <Avatar className={classes.redPist}>3</Avatar> Ski down piste 6 — 15 minutes
+                    </p>
+                    <p>{gondolaIcon} take Gondola — 10 minutes</p>
+                    <p>
+                      <Avatar className={classes.blackPist}>8</Avatar> Ski down piste 8 — 20 minutes
+                    </p>
+                  </Typography>
+                </ExpansionPanelDetails>
+              </ExpansionPanel>
+
+              <ListSubheader  style={{background: 'white'}}>{`Near Points of Interest`}</ListSubheader>
+
               <ExpansionPanel>
                 <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                   <Avatar>
                     <BeachAccessIcon />
                   </Avatar>
                   <ListItemText
+                    className={classes.left}
                     primary="Hut"
                     secondary={
                       <span>
-                      <span className={classes.med}>~30 min</span> via fastest route
-                    </span>
+                        <span className={classes.med}>~30 min</span> via fastest route
+                      </span>
                     }
                   />
-                  <Avatar className={classes.redPist}>21</Avatar>
-                <Avatar className={classes.blackPist}>4</Avatar>
-                <Avatar className={classes.redPist}>13b</Avatar>
-                <Avatar className={classes.bluePist}>10</Avatar>
+                  <Avatar className={classes.redPist}>3</Avatar>
                   <Avatar />
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
@@ -260,9 +329,10 @@ class Index extends React.Component<WithStyles<'root'>> {
               <ExpansionPanel>
                 <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                   <Avatar>
-                    <BeachAccessIcon />
+                    <ChangeHistory />
                   </Avatar>
                   <ListItemText
+                    className={classes.left}
                     primary="Mountain peak"
                     secondary={
                       <span>
@@ -326,11 +396,14 @@ class Index extends React.Component<WithStyles<'root'>> {
           </div>
           <AppBar position="static" style={{ position: 'fixed', bottom: '0' }} color="primary">
             <Toolbar>
+            {/*<Button color="inherit" onClick={() => (this.open = true)}>*/}
+                <Typography color="inherit">Today</Typography>
+              {/*</Button>*/}
               {/*<IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
             <MenuIcon />
 </IconButton>*/}
               <Typography variant="title" color="inherit" className={classes.flex}>
-                → 30 km 🕔 2:20h ⊘ 60km/h
+                →&nbsp;30&nbsp;km 🕔&nbsp;2:20h ⊘&nbsp;45&nbsp;km/h
               </Typography>
               <Button color="inherit" onClick={() => (this.open = true)}>
                 Details
