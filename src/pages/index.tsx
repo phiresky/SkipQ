@@ -154,6 +154,10 @@ class Index extends React.Component<WithStyles<'root'>> {
     return (
       <MuiThemeProvider theme={muiTheme}>
         <style>{`
+        html {
+          max-width: 500px;
+          margin: 0 auto;
+        }
       html, body, #root, .Index-root-1 {
         height: 100%;
       }
@@ -395,7 +399,7 @@ class Index extends React.Component<WithStyles<'root'>> {
               Statistics
             </Button>
           </div>
-          <AppBar position="static" style={{ position: 'fixed', bottom: '0' }} color="primary">
+          <AppBar position="static" style={{ position: 'fixed', bottom: '0', maxWidth: '500px' }} color="primary">
             <Toolbar>
             {/*<Button color="inherit" onClick={() => (this.open = true)}>*/}
                 <Typography color="inherit">Today</Typography>
